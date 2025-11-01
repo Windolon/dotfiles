@@ -43,5 +43,8 @@ alias conda-activate="eval $(do-conda-activate)"
 # Opens the Alacritty config.
 alias alacritty-config="nvim ~/.config/alacritty/alacritty.toml"
 
+# Opens the tmux config.
+alias tmux-config="nvim ~/.config/tmux/tmux.conf"
+
 # Alias for git to handle dotfiles version tracking.
 alias config="/usr/bin/git --git-dir=$HOME/.cfg/ --work-tree=$HOME"
