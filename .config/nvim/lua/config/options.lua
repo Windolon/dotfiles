@@ -3,3 +3,5 @@
 -- Add any additional options here
 
 vim.opt.scrolloff = 10
+
+vim.o.relativenumber = false

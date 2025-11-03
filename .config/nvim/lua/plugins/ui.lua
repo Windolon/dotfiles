@@ -11,4 +11,17 @@ return {
       colorscheme = "nord",
     },
   },
+
+  {
+    "nvim-lualine/lualine.nvim",
+    opts = {
+      sections = {
+        lualine_z = {
+          function()
+            return string.format("%s", vim.bo.filetype):upper()
+          end,
+        },
+      },
+    },
+  },
 }
