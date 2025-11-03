@@ -13,3 +13,8 @@ size = 12
 
 [mouse]
 hide_when_typing = true
+
+[keyboard]
+bindings = [
+  { key = "V", mods = "Control", action = "ToggleViMode" },
+]
