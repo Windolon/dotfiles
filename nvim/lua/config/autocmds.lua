@@ -27,24 +27,7 @@ vim.api.nvim_create_autocmd("BufWritePost", {
 -- Treesitter features are not automatically enabled
 -- Start treesitter on most supported filetypes
 vim.api.nvim_create_autocmd("FileType", {
-  pattern = {
-    "bash",
-    "c",
-    "cpp",
-    "json",
-    "lua",
-    "markdown",
-    "python",
-    "query",
-    "rust",
-    "squirrel",
-    "tmux",
-    "toml",
-    "vim",
-    "vimdoc",
-    "yaml",
-  },
-  callback = function()
-    vim.treesitter.start()
-  end
+	callback = function(ev)
+		pcall(vim.treesitter.start, ev.buf)
+	end,
 })
