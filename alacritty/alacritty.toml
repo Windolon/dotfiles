@@ -1,5 +1,11 @@
+# List of options is available from `man 5 alacritty`. Both the man page and this file
+# are easy enough to read and understand, so you won't see many comments.
+
+# ==================================================================================================
+
 [general]
 
+# Load Nord theme.
 import = [
   "~/.config/alacritty/nord.toml",
 ]
