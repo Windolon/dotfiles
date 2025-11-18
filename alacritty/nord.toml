@@ -1,5 +1,7 @@
 # TOML version of the Alacritty Nord theme at https://github.com/nordtheme/alacritty
-# With added options and fixes from the PRs in the repo
+# with added options and fixes from the PRs in the repo.
+
+# ==================================================================================================
 
 [colors.primary]
 background = "#2e3440"
