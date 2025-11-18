@@ -1,4 +1,6 @@
 channels:
   - defaults
 
+# Stop showing the current environment name in the shell prompt.
+# (Oh My Zsh: Agnoster takes care of this already.)
 changeps1: false
