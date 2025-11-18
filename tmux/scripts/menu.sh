@@ -1,5 +1,10 @@
 #!/bin/bash
 
+# tmux popup menu script. Taken from:
+# https://github.com/radleylewis/dotfiles/blob/master/.config/tmux/scripts/tmux-menu.sh
+
+# ==================================================================================================
+
 {
 	tmux list-sessions -F '#S' | grep -v '^_popup_' | while read -r session; do
 		echo "SESSION:$session"
