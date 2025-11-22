@@ -36,6 +36,8 @@ vim.opt.diffopt:append("vertical")
 vim.opt.diffopt:append("algorithm:patience")
 vim.opt.diffopt:append("linematch:60")
 
+vim.opt.swapfile = false
+
 vim.opt.undofile = true
 local undodir = "~/.local/share/nvim/undodir"
 vim.opt.undodir = vim.fn.expand(undodir)
@@ -514,6 +516,10 @@ local efm_languages = {
 		require("efmls-configs.linters.luacheck"),
 		require("efmls-configs.formatters.stylua"),
 	},
+	python = {
+		require("efmls-configs.linters.flake8"),
+		require("efmls-configs.formatters.black"),
+	},
 }
 vim.lsp.config("efm", {
 	capabilities = capabilities,
@@ -598,6 +604,7 @@ vim.lsp.config("lua_ls", {
 vim.lsp.enable({
 	"efm",
 	"lua_ls",
+	"pyright",
 })
 -- }}}
 
