@@ -1,9 +1,5 @@
 globals = {
-  "vim",
+	"vim",
 	"MiniIcons",
-  "MiniSnippets",
-}
-
-read_globals = {
-	"use",
+    "MiniSnippets",
 }
