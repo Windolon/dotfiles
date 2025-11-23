@@ -1,8 +1,19 @@
-# NOTE: Make a symlink to enable this file:
-# ln -s ~/.config/zsh/zshrc ~/.zshrc
-
 # NOTE: oh-my-zsh default template and docs for options:
 # https://github.com/ohmyzsh/ohmyzsh/blob/master/templates/zshrc.zsh-template
+
+# these lines by the zsh "init utility" should be kept at the top
+# {{{ zsh-newuser-install
+HISTFILE=~/.histfile
+HISTSIZE=1000
+SAVEHIST=1000
+bindkey -v
+# }}}
+# {{{ compinstall
+zstyle :compinstall filename '/home/felix/.zshrc'
+
+autoload -Uz compinit
+compinit
+# }}}
 
 # {{{ $PATH
 # A wrapper for prepending to the $PATH variable.
