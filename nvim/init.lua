@@ -21,8 +21,6 @@ vim.opt.spelllang = { "en", "de" }
 vim.opt.tabstop = 4
 vim.opt.shiftwidth = 4
 vim.opt.softtabstop = 4
-vim.opt.expandtab = true
-vim.opt.smartindent = true
 
 vim.opt.ignorecase = true
 -- \Cquery to force case-sensitive search regardless
@@ -62,27 +60,26 @@ vim.opt.guicursor = {
 
 vim.opt.splitbelow = true
 vim.opt.splitright = true
+
+vim.opt.confirm = true
 -- }}}
 
 -- {{{ native keymaps
-vim.keymap.set("n", "<leader>rc", "<Cmd>e $MYVIMRC<CR>", { desc = "Edit init.lua / vimRC" })
+-- :help index to see default mappings
+vim.keymap.set("n", "<leader>rc", "<Cmd>e $MYVIMRC<CR>", { desc = "Edit nvim[rc]" })
 vim.keymap.set("n", "<leader>rr", "<Cmd>restart<CR>", { desc = "Restart Neovim" })
+vim.keymap.set("n", "<leader>ru", "<Cmd>lua vim.pack.update()<CR>", { desc = "Update all plugins" })
 
 vim.keymap.set("n", "n", "nzzzv", { desc = "Next search result (centered)" })
 vim.keymap.set("n", "N", "Nzzzv", { desc = "Previous search result (centered)" })
 vim.keymap.set("n", "<C-d>", "<C-d>zz", { desc = "Half page down (centered)" })
 vim.keymap.set("n", "<C-u>", "<C-u>zz", { desc = "Half page up (centered)" })
 
+-- default functionalities for H and L really suck and i wont use them
 vim.keymap.set("n", "<S-h>", "<Cmd>bprevious<CR>", { desc = "Previous buffer" })
 vim.keymap.set("n", "<S-l>", "<Cmd>bnext<CR>", { desc = "Next buffer" })
 
-vim.keymap.set("n", "<C-h>", "<C-w>h", { desc = "Move to left window" })
-vim.keymap.set("n", "<C-j>", "<C-w>j", { desc = "Move to bottom window" })
-vim.keymap.set("n", "<C-k>", "<C-w>k", { desc = "Move to top window" })
-vim.keymap.set("n", "<C-l>", "<C-w>l", { desc = "Move to right window" })
-
-vim.keymap.set("n", "<leader>wr", "<Cmd>vsplit<CR>", { desc = "Split window vertically to the Right" })
-vim.keymap.set("n", "<leader>wb", "<Cmd>split<CR>", { desc = "Split window horizontally Below" })
+-- <C-Left> and <C-Right> are aliases for b and w originally (i dont use them)
 vim.keymap.set("n", "<C-Up>", "<Cmd>resize +2<CR>", { desc = "Increase window height" })
 vim.keymap.set("n", "<C-Down>", "<Cmd>resize -2<CR>", { desc = "Decrease window height" })
 vim.keymap.set("n", "<C-Left>", "<Cmd>vertical resize -2<CR>", { desc = "Decrease window width" })
@@ -94,9 +91,8 @@ vim.keymap.set("v", ">", ">gv", { desc = "Indent right and reselect" })
 vim.keymap.set("n", "J", "mzJ`z", { desc = "Join lines and keep cursor position" })
 
 vim.keymap.set("n", "<leader>bd", "<Cmd>bd<CR>", { desc = "Close buffer" })
-vim.keymap.set("n", "<leader>wd", "<Cmd>q<CR>", { desc = "Close window" })
 
-vim.keymap.set("n", "<F2>", "<Cmd>noh<CR>", { desc = "Turns off highlighting until the next search" })
+vim.keymap.set("n", "<Esc>", "<Cmd>noh<CR>", { desc = "Turns off highlighting until the next search" })
 
 vim.keymap.set("t", "<Esc>", "<C-\\><C-n>", { desc = "Exit terminal mode" })
 -- }}}
@@ -194,6 +190,12 @@ vim.pack.add({
 })
 require("mini.trailspace").setup()
 -- }}}
+-- {{{ guess-indent.nvim
+vim.pack.add({
+	{ src = "https://github.com/NMAC427/guess-indent.nvim" },
+})
+require("guess-indent").setup({})
+-- }}}
 
 -- {{{ mini.ai
 vim.pack.add({
@@ -255,7 +257,7 @@ vim.keymap.set(
 	{ desc = "Symbols in buffer (fzf-lua)" }
 )
 -- }}}
--- {{{ which-key.nvim
+-- {{{ which-key.nvim <- mini.icons
 vim.pack.add({
 	{ src = "https://github.com/folke/which-key.nvim" },
 })
@@ -431,11 +433,26 @@ vim.api.nvim_create_autocmd("FileType", {
 })
 -- }}}
 -- {{{ mason.nvim
--- NOTE: If you're migrating, make sure to redownload the binaries in use
 vim.pack.add({
 	{ src = "https://github.com/mason-org/mason.nvim" },
 })
 require("mason").setup()
+-- }}}
+-- {{{ mason-tool-installer.nvim <- mason.nvim
+vim.pack.add({
+	{ src = "https://github.com/WhoIsSethDaniel/mason-tool-installer.nvim" },
+})
+-- NOTE: Adding support for a new language: dont forget to add tools to this list
+-- so that less stuff needs to be done when migrating
+require("mason-tool-installer").setup({
+	ensure_installed = {
+		"efm",
+		"lua-language-server",
+		"luacheck",
+		"stylua",
+		-- pyright, flake8 and black will be installed on a per-venv basis
+	},
+})
 -- }}}
 -- {{{ nvim-lspconfig
 -- See the quickstart configs at https://github.com/neovim/nvim-lspconfig/tree/master/lsp
