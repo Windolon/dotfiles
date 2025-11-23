@@ -9,7 +9,7 @@ SAVEHIST=1000
 bindkey -v
 # }}}
 # {{{ compinstall
-zstyle :compinstall filename '/home/felix/.zshrc'
+zstyle :compinstall filename "$HOME/.zshrc"
 
 autoload -Uz compinit
 compinit
