@@ -1,12 +1,10 @@
-# zsh does not look into ~/.config, so you need to make a symlink:
+# NOTE: Make a symlink to enable this file:
 # ln -s ~/.config/zsh/zshrc ~/.zshrc
 
-# Forgot some Oh My Zsh settings? See the .zshrc template file that came
-# with the installation at:
+# NOTE: oh-my-zsh default template and docs for options:
 # https://github.com/ohmyzsh/ohmyzsh/blob/master/templates/zshrc.zsh-template
 
-# ==================================================================================================
-
+# {{{ $PATH
 # A wrapper for prepending to the $PATH variable.
 # Note that adding entries to $PATH via this function works like a stack:
 # later arguments get searched first.
@@ -23,34 +21,30 @@ add_to_path() {
   done
   export PATH
 }
-# Configures user specific environment.
 add_to_path \
   "$HOME/bin" \
   "$HOME/.local/bin" \
+# }}}
 
-# Path to Oh My Zsh installation.
+# {{{ oh-my-zsh setup
 export ZSH="$HOME/.oh-my-zsh"
 
-# Sets the theme for Oh My Zsh.
 ZSH_THEME="agnoster"
 
-# Oh My Zsh plugins.
 plugins=(
   git
   fzf-tab
 )
 
-# Loads Oh My Zsh.
 source $ZSH/oh-my-zsh.sh
-
-# ===== User configuration =====
+# }}}
 
 # Rust installation.
 . "$HOME/.cargo/env"
 
-# Sets the default command-line editor to be neovim.
 export EDITOR='nvim'
 
+# {{{ aliases
 # Outputs a human readable output of env variables when
 # there are multiple entries. Is otherwise the same as `echo`
 # when there is only one entry.
@@ -61,22 +55,19 @@ echoenv() {
   tr ':' '\n' <<<$1
 }
 
-# Outputs the list of all installed rpm packages to ~/rpm_qa.txt, overwriting if it exists.
 alias rpm-qa="rpm -qa > rpm_qa.txt"
 
-# Activates the base conda environment.
-alias do-conda-activate="~/miniconda3/bin/conda shell.bash hook"
-alias conda-activate="eval $(do-conda-activate)"
+alias do-conda-init="~/miniconda3/bin/conda shell.bash hook"
+alias conda-init="eval $(do-conda-init)"
 
-# Opens the Alacritty config.
 alias alacritty-config="nvim $HOME/.config/alacritty/alacritty.toml"
 
-# Opens the tmux config.
 alias tmux-config="nvim $HOME/.config/tmux/tmux.conf"
 
-# Opens this file.
 # Note that we open the link instead of the actual file.
 alias zshrc="nvim $HOME/.zshrc"
 
-# Alias for git to handle config files version tracking.
 alias config="/usr/bin/git --git-dir=$HOME/.config/.cfg/ --work-tree=$HOME/.config"
+# }}}
+
+# vim: foldmethod=marker foldlevel=0
