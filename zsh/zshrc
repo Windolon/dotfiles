@@ -53,7 +53,7 @@ source $ZSH/oh-my-zsh.sh
 # Rust installation.
 . "$HOME/.cargo/env"
 
-export EDITOR='nvim'
+export EDITOR="nvim"
 
 # {{{ aliases
 # Outputs a human readable output of env variables when
@@ -63,7 +63,7 @@ export EDITOR='nvim'
 # Usage:
 #   echoenv $VARIABLE
 echoenv() {
-  tr ':' '\n' <<<$1
+  tr ":" "\n" <<<$1
 }
 
 alias rpm-qa="rpm -qa > rpm_qa.txt"
