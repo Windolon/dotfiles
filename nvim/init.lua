@@ -59,6 +59,8 @@ vim.opt.splitbelow = true
 vim.opt.splitright = true
 
 vim.opt.confirm = true
+
+vim.opt.winborder = "rounded"
 -- }}}
 
 -- {{{ native keymaps
