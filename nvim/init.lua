@@ -1,9 +1,6 @@
 -- This is it. One file to rule them all.
 
 -- {{{ options
-vim.g.mapleader = " "
-vim.g.maplocalleader = " "
-
 -- reenable if any plugins are written in these languages
 vim.g.loaded_node_provider = 0
 vim.g.loaded_perl_provider = 0
@@ -65,6 +62,10 @@ vim.opt.confirm = true
 -- }}}
 
 -- {{{ native keymaps
+vim.g.mapleader = " "
+-- is "[" on us/uk keyboards
+vim.g.maplocalleader = "ü"
+
 -- :help index to see default mappings
 vim.keymap.set("n", "<leader>rc", "<Cmd>e $MYVIMRC<CR>", { desc = "Edit nvim[rc]" })
 vim.keymap.set("n", "<leader>rr", "<Cmd>restart<CR>", { desc = "Restart Neovim" })
