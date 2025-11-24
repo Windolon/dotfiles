@@ -61,6 +61,8 @@ vim.opt.splitright = true
 vim.opt.confirm = true
 
 vim.opt.winborder = "rounded"
+
+vim.lsp.inlay_hint.enable(true)
 -- }}}
 
 -- {{{ native keymaps
