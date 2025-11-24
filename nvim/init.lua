@@ -270,8 +270,6 @@ require("which-key").setup({
 	preset = "helix",
 	spec = {
 		{ "<leader>f", group = "fuzzy find" },
-		{ "<leader>w", group = "windows" },
-		{ "<leader>x", group = "trouble and diagnostics" },
 		{ "<leader>b", group = "buffers" },
 		{ "<leader>g", group = "gitsigns actions" },
 		{ "<leader>g", mode = "v", group = "gitsigns actions" },
@@ -300,6 +298,7 @@ vim.pack.add({
 	{ src = "https://github.com/lewis6991/gitsigns.nvim" },
 })
 require("gitsigns").setup({
+	-- they should probably be global keybinds but whatever
 	on_attach = function(bufnr)
 		local gitsigns = require("gitsigns")
 
@@ -452,6 +451,7 @@ vim.pack.add({
 require("mason-tool-installer").setup({
 	ensure_installed = {
 		"efm",
+		"codelldb",
 		"lua-language-server",
 		"luacheck",
 		"stylua",
@@ -515,6 +515,35 @@ require("blink.cmp").setup({
 		default = { "lsp", "path", "snippets", "buffer" },
 	},
 	fuzzy = { implementation = "prefer_rust_with_warning" },
+})
+-- }}}
+
+-- {{{ nvim-dap
+vim.pack.add({
+	{ src = "https://github.com/mfussenegger/nvim-dap" },
+})
+-- the config for dap is below
+-- }}}
+-- {{{ nvim-dap-view <- nvim-dap
+vim.pack.add({
+	{ src = "https://github.com/igorlfs/nvim-dap-view" },
+})
+local dap, dapview = require("dap"), require("dap-view")
+vim.keymap.set("n", "<F8>", dap.continue, { desc = "Continue / start debugging" })
+vim.keymap.set("n", "<F4>", dap.toggle_breakpoint, { desc = "Toggle breakpoint" })
+vim.keymap.set("n", "<Left>", dap.step_out, { desc = "Step out" })
+vim.keymap.set("n", "<Down>", dap.step_over, { desc = "Step over" })
+vim.keymap.set("n", "<Right>", dap.step_into, { desc = "Step into" })
+vim.keymap.set("n", "<Up>", dap.restart_frame, { desc = "Restart frame" })
+vim.keymap.set("n", "<F3>", dapview.toggle, { desc = "Toggle dap-view" })
+-- }}}
+
+-- {{{ rustaceanvim
+vim.pack.add({
+	{
+		src = "https://github.com/mrcjkb/rustaceanvim",
+		version = "v6.9.7",
+	},
 })
 -- }}}
 -- }}}
@@ -626,6 +655,7 @@ vim.lsp.config("lua_ls", {
 vim.lsp.enable({
 	"efm",
 	"lua_ls",
+	-- rustaceanvim takes care of rust-analyzer already
 	"pyright",
 })
 -- }}}
