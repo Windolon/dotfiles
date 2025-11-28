@@ -55,6 +55,8 @@ source $ZSH/oh-my-zsh.sh
 
 export EDITOR="nvim"
 
+export VIRTUAL_ENV_DISABLE_PROMPT=1
+
 # {{{ aliases
 # Outputs a human readable output of env variables when
 # there are multiple entries. Is otherwise the same as `echo`
