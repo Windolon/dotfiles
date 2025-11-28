@@ -68,13 +68,9 @@ echoenv() {
 
 alias rpm-qa="rpm -qa > rpm_qa.txt"
 
-alias do-conda-init="~/miniconda3/bin/conda shell.bash hook"
-alias conda-init="eval $(do-conda-init)"
-
 alias editrc="nvim ~/.rc/"
 # Note that we open the links instead of the actual file.
 alias alacrittyrc="nvim $HOME/.config/alacritty/alacritty.toml"
-alias condarc="nvim $HOME/.config/conda/condarc"
 alias nvimrc="nvim $HOME/.config/nvim/init.lua"
 alias tmuxrc="nvim $HOME/.config/tmux/tmux.conf"
 alias zshrc="nvim $HOME/.zshrc"
