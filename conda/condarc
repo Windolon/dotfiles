@@ -1,5 +1,0 @@
-channels:
-  - defaults
-
-# Stop showing the current environment name in the shell prompt.
-changeps1: false
