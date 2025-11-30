@@ -454,6 +454,7 @@ require("mason-tool-installer").setup({
 		"lua-language-server",
 		"stylua",
 		-- pyright and black will be installed on a per-venv basis
+		"tex-fmt",
 	},
 })
 -- }}}
@@ -472,6 +473,7 @@ require("conform").setup({
 	formatters_by_ft = {
 		lua = { "stylua" },
 		python = { "black" },
+		tex = { "tex-fmt" },
 	},
 	format_on_save = {
 		lsp_format = "fallback",
@@ -488,6 +490,14 @@ vim.pack.add({
 vim.pack.add({
 	{ src = "https://github.com/nvim-mini/mini.snippets" },
 })
+-- Adjust language patterns
+local latex_patterns = { "latex/**/*.json", "**/latex.json" }
+local lang_patterns = {
+	tex = latex_patterns,
+	plaintex = latex_patterns,
+	-- Recognize special injected language of markdown tree-sitter parser
+	markdown_inline = { "markdown.json" },
+}
 local gen_loader = require("mini.snippets").gen_loader
 require("mini.snippets").setup({
 	snippets = {
@@ -496,7 +506,7 @@ require("mini.snippets").setup({
 
 		-- Load snippets based on current language by reading files from
 		-- "snippets/" subdirectories from 'runtimepath' directories.
-		gen_loader.from_lang(),
+		gen_loader.from_lang({ lang_patterns = lang_patterns }),
 	},
 })
 -- }}}
@@ -518,7 +528,7 @@ require("blink.cmp").setup({
 	completion = { documentation = { auto_show = false } },
 	snippets = { preset = "mini_snippets" },
 	sources = {
-		default = { "lsp", "path", "snippets", "buffer" },
+		default = { "lsp", "path", "snippets", "buffer", "omni" },
 	},
 	fuzzy = { implementation = "prefer_rust_with_warning" },
 })
@@ -551,6 +561,12 @@ vim.pack.add({
 		version = "v6.9.7",
 	},
 })
+-- }}}
+-- {{{ vimtex
+vim.pack.add({
+	{ src = "https://github.com/lervag/vimtex" },
+})
+vim.g.vimtex_view_method = "zathura"
 -- }}}
 -- }}}
 
