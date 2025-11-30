@@ -568,6 +568,11 @@ vim.pack.add({
 })
 vim.g.vimtex_view_method = "zathura"
 -- }}}
+-- {{{ render-markdown.nvim
+vim.pack.add({
+	{ src = "https://github.com/MeanderingProgrammer/render-markdown.nvim" },
+})
+-- }}}
 -- }}}
 
 -- {{{ lsp configs
