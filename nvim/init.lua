@@ -450,12 +450,10 @@ vim.pack.add({
 -- so that less stuff needs to be done when migrating
 require("mason-tool-installer").setup({
 	ensure_installed = {
-		"efm",
 		"codelldb",
 		"lua-language-server",
-		"luacheck",
 		"stylua",
-		-- pyright, flake8 and black will be installed on a per-venv basis
+		-- pyright and black will be installed on a per-venv basis
 	},
 })
 -- }}}
@@ -465,11 +463,19 @@ vim.pack.add({
 	{ src = "https://github.com/neovim/nvim-lspconfig" },
 })
 -- }}}
--- {{{ efmls-configs-nvim
+-- {{{ conform.nvim
 vim.pack.add({
-	{
-		src = "https://github.com/creativenull/efmls-configs-nvim",
-		version = "v1.10.1",
+	{ src = "https://github.com/stevearc/conform.nvim" },
+})
+-- NOTE: Adding support for a new language: add formatters here
+require("conform").setup({
+	formatters_by_ft = {
+		lua = { "stylua" },
+		python = { "black" },
+	},
+	format_on_save = {
+		lsp_format = "fallback",
+		timeout_ms = 500,
 	},
 })
 -- }}}
@@ -548,7 +554,7 @@ vim.pack.add({
 -- }}}
 -- }}}
 
--- {{{ lsp configs, linters and formatters
+-- {{{ lsp configs
 -- merges both nvim-ufo and blink.cmp together
 local capabilities = {
 	textDocument = {
@@ -560,45 +566,6 @@ local capabilities = {
 }
 capabilities = require("blink.cmp").get_lsp_capabilities(capabilities)
 
--- {{{ efm
--- NOTE: Adding support for a new language: add linters/formatters configs to this table
-local efm_languages = {
-	lua = {
-		require("efmls-configs.linters.luacheck"),
-		require("efmls-configs.formatters.stylua"),
-	},
-	python = {
-		require("efmls-configs.linters.flake8"),
-		require("efmls-configs.formatters.black"),
-	},
-}
-vim.lsp.config("efm", {
-	capabilities = capabilities,
-	filetypes = vim.tbl_keys(efm_languages),
-	init_options = {
-		documentFormatting = true,
-		documentRangeFormatting = true,
-		hover = true,
-		documentSymbol = true,
-		codeAction = true,
-		completion = true,
-	},
-	settings = { languages = efm_languages },
-})
-vim.api.nvim_create_autocmd("BufWritePost", {
-	group = vim.api.nvim_create_augroup("LspFormattingGroup", {}),
-	callback = function(ev)
-		local efm = vim.lsp.get_clients({ name = "efm", bufnr = ev.buf })
-
-		if vim.tbl_isempty(efm) then
-			return
-		end
-
-		vim.lsp.buf.format({ name = "efm" })
-		vim.cmd("noa w")
-	end,
-})
--- }}}
 -- {{{ lua_ls
 vim.lsp.config("lua_ls", {
 	capabilities = capabilities,
@@ -653,7 +620,6 @@ vim.lsp.config("lua_ls", {
 
 -- NOTE: Adding support for a new language: enable lsp configs here
 vim.lsp.enable({
-	"efm",
 	"lua_ls",
 	-- rustaceanvim takes care of rust-analyzer already
 	"pyright",

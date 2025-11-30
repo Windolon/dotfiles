@@ -1,5 +1,0 @@
-globals = {
-	"vim",
-	"MiniIcons",
-    "MiniSnippets",
-}
