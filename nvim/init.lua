@@ -644,6 +644,7 @@ vim.lsp.enable({
 	"lua_ls",
 	-- rustaceanvim takes care of rust-analyzer already
 	"pyright",
+	"marksman",
 })
 -- }}}
 
