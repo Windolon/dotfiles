@@ -452,6 +452,7 @@ require("mason-tool-installer").setup({
 	ensure_installed = {
 		"codelldb",
 		"lua-language-server",
+		"marksman",
 		"stylua",
 		-- pyright and black will be installed on a per-venv basis
 		"tex-fmt",
