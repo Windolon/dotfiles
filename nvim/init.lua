@@ -574,6 +574,13 @@ vim.pack.add({
 	{ src = "https://github.com/MeanderingProgrammer/render-markdown.nvim" },
 })
 -- }}}
+
+-- {{{ wiki.vim
+vim.pack.add({
+	{ src = "https://github.com/lervag/wiki.vim" },
+})
+vim.g.wiki_root = "~/wiki"
+-- }}}
 -- }}}
 
 -- {{{ lsp configs
