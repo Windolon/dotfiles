@@ -218,7 +218,11 @@ require("mini.move").setup()
 vim.pack.add({
 	{ src = "https://github.com/nvim-mini/mini.pairs" },
 })
-require("mini.pairs").setup()
+require("mini.pairs").setup({
+	mappings = {
+		[">"] = { action = "close", pair = "<>", neigh_pattern = "[^\\]." },
+	},
+})
 -- }}}
 -- {{{ mini.surround
 vim.pack.add({
